@@ -8,7 +8,7 @@ import hu.crs.testApp.web.TestServiceA;
 import hu.crs.testApp.web.TestServiceB;
 
 public class Application {
-    Container context = new ContainerImpl();
+    private Container context = new ContainerImpl();
 
     public static void main(String[] args) {
         Application application = new Application();
@@ -23,6 +23,6 @@ public class Application {
 
     private void start() {
         new TestController((TestService) context.getBean("beanA")).hello();
-        new TestController((TestService) context.getBean(TestServiceB.class)).hello();
+        new TestController(context.getBean(TestServiceB.class)).hello();
     }
 }

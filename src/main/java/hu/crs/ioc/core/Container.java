@@ -7,5 +7,5 @@ public interface Container {
 
     void addBean(Object bean);
 
-    Object getBean(Class<?> clazz);
+    <T> T getBean(Class<T> clazz);
 }

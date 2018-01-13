@@ -33,8 +33,8 @@ public class ContainerImpl implements Container {
     }
 
     @Override
-    public Object getBean(Class<?> clazz) {
+    public <T> T getBean(Class<T> clazz) {
         String canonicalName = clazz.getCanonicalName();
-        return getBean(canonicalName);
+        return (T) getBean(canonicalName);
     }
 }
