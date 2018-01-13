@@ -47,13 +47,18 @@ public class ContainerTest {
     @Test
     public void shouldAddBeanToContextByType() {
         container.addBean(10);
-        Integer integer = (Integer) container.getBean(Integer.class);
+        Integer integer = container.getBean(Integer.class);
         assertThat(integer, is(10));
     }
 
     @Test(expected = BeanAlreadyExistsException.class)
     public void shouldReturnBeanAlreadyExistsExceptionIfTwoBeansWithSameTypeIsAdded() {
-        container.addBean(10);
-        container.addBean(10);
+        container.addBean(new Object());
+        container.addBean(new Object());
+    }
+
+    @Test(expected = NoSuchBeanException.class)
+    public void shouldReturnNoSuchBeanExceptionIfNoBeanWithTypeIsPresent() {
+        container.getBean(Integer.class);
     }
 }
