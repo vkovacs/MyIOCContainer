@@ -50,4 +50,10 @@ public class ContainerTest {
         Integer integer = (Integer) container.getBean(Integer.class);
         assertThat(integer, is(10));
     }
+
+    @Test(expected = BeanAlreadyExistsException.class)
+    public void shouldReturnBeanAlreadyExistsExceptionIfTwoBeansWithSameTypeIsAdded() {
+        container.addBean(10);
+        container.addBean(10);
+    }
 }

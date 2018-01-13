@@ -33,6 +33,7 @@ public class ContainerImpl implements Container {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> clazz) {
         String canonicalName = clazz.getCanonicalName();
         return (T) getBean(canonicalName);
