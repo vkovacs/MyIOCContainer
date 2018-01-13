@@ -1,4 +1,6 @@
-package hu.crs.testApp.web;
+package hu.crs.testApp.infrastructure.impl;
+
+import hu.crs.testApp.infrastructure.TestService;
 
 public class TestController {
     private TestService testService;
