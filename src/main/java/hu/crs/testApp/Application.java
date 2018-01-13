@@ -18,11 +18,11 @@ public class Application {
 
     private void initContext() {
         context.addBean("beanA", new TestServiceA());
-        context.addBean("beanB", new TestServiceB());
+        context.addBean(new TestServiceB());
     }
 
     private void start() {
         new TestController((TestService) context.getBean("beanA")).hello();
-        new TestController((TestService) context.getBean("beanB")).hello();
+        new TestController((TestService) context.getBean(TestServiceB.class)).hello();
     }
 }

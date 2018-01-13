@@ -43,4 +43,11 @@ public class ContainerTest {
         container.addBean("bean", new Object());
         container.addBean("bean", new Object());
     }
+
+    @Test
+    public void shouldAddBeanToContextByType() {
+        container.addBean(10);
+        Integer integer = (Integer) container.getBean(Integer.class);
+        assertThat(integer, is(10));
+    }
 }

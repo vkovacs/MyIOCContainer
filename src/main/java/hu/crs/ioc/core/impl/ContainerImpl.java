@@ -25,4 +25,16 @@ public class ContainerImpl implements Container {
         Optional<Object> bean = Optional.ofNullable(container.get(name));
         return bean.orElseThrow(NoSuchBeanException::new);
     }
+
+    @Override
+    public void addBean(Object bean) {
+        String canonicalName = bean.getClass().getCanonicalName();
+        addBean(canonicalName, bean);
+    }
+
+    @Override
+    public Object getBean(Class<?> clazz) {
+        String canonicalName = clazz.getCanonicalName();
+        return getBean(canonicalName);
+    }
 }
