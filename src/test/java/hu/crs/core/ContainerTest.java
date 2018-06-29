@@ -1,17 +1,18 @@
 package hu.crs.core;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
 import hu.crs.ioc.core.Container;
 import hu.crs.ioc.core.exception.BeanAlreadyExistsException;
 import hu.crs.ioc.core.exception.NoSuchBeanException;
+import hu.crs.ioc.core.exception.NotClearBeanDefinitonException;
 import hu.crs.ioc.core.impl.ContainerImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runners.model.Statement;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
 public class ContainerTest {
 
@@ -60,5 +61,27 @@ public class ContainerTest {
     @Test(expected = NoSuchBeanException.class)
     public void shouldReturnNoSuchBeanExceptionIfNoBeanWithTypeIsPresent() {
         container.getBean(Integer.class);
+    }
+
+    private interface TestInterFace {
+    }
+
+    private class TestA implements TestInterFace {
+    }
+
+    private class TestB implements TestInterFace {
+    }
+
+    @Test
+    public void shouldAddTwoClassesWhichImplementTheSameInterface() {
+        container.addBean(new TestA());
+        container.addBean(new TestB());
+    }
+
+    @Test(expected = NotClearBeanDefinitonException.class)
+    public void shouldReturnNoSuchBeanDefinitionExceptionInNotClearWhichBeanShouldReturnedByType() {
+        container.addBean(new TestA());
+        container.addBean(new TestB());
+        container.getBean(TestInterFace.class);
     }
 }
