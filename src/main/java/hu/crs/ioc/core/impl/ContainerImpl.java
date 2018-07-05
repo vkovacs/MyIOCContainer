@@ -54,7 +54,7 @@ public class ContainerImpl implements Container {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> List<T> getBeansImplementsAnInterface(Class<T> clazz) {
+    private <T> List<T> getBeansImplementsAnInterface(Class<T> clazz) {
         List<T> beansImplementingTheInterface = new ArrayList<>();
 
         for (Object object : container.values()) {

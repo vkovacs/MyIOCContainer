@@ -3,6 +3,7 @@ package hu.crs.core;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import hu.crs.ioc.core.Container;
 import hu.crs.ioc.core.exception.BeanAlreadyExistsException;
@@ -76,6 +77,15 @@ public class ContainerTest {
     public void shouldAddTwoClassesWhichImplementTheSameInterface() {
         container.addBean(new TestA());
         container.addBean(new TestB());
+    }
+
+    @Test
+    public void shouldReturnBeanWhichImplementsAnInterface() {
+        TestA testA = new TestA();
+        container.addBean(testA);
+        TestInterFace returnedBean = container.getBean(TestInterFace.class);
+        assertThat(returnedBean, notNullValue());
+        assertTrue(returnedBean instanceof TestA);
     }
 
     @Test(expected = NotClearBeanDefinitonException.class)
